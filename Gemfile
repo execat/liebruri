@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby ENV['RUBY_VERSION'] || '2.3.0'
 
 gem 'rails', '>= 5.0.0.beta3', '< 5.1'
 gem 'pg', '~> 0.18'
@@ -16,6 +16,8 @@ gem 'jbuilder', '~> 2.0'
 # gem 'bcrypt', '~> 3.1.7'
 
 # gem 'capistrano-rails', group: :development
+
+gem 'foreman'
 
 group :development, :test do
   gem 'byebug'
