@@ -22,6 +22,11 @@ gem 'slim-rails'
 
 group :development, :test do
   gem 'byebug'
+  gem 'pry'
+
+  # Testing
+  gem 'rspec-rails'
+  gem 'capybara'
 end
 
 group :development do
