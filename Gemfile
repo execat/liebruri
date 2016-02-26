@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.0'
 # gem 'capistrano-rails', group: :development
 
 gem 'foreman'
+gem 'slim-rails'
 
 group :development, :test do
   gem 'byebug'
