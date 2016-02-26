@@ -21,5 +21,11 @@ module Liebruri
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    # Disable helper and CoffeeScript generators
+    config.generators do |generate|
+      generate.helper false
+      generate.javascript_engine :js
+    end
   end
 end
