@@ -20,6 +20,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'foreman'
 gem 'slim-rails'
 
+gem 'people'
+
 group :development, :test do
   gem 'byebug'
   gem 'pry'
