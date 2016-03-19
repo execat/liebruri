@@ -6,6 +6,7 @@ class CreateAuthors < ActiveRecord::Migration[5.0]
       t.string :mname
       t.string :lname
       t.string :suffix
+      t.string :full_name
 
       t.timestamps
     end
