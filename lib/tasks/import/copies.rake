@@ -6,7 +6,7 @@ namespace :import do
     i = 0
     ActiveRecord::Base.transaction do
       CSV.foreach(filename, headers: true, col_sep: "\t") do |row|
-        book_id = Book.where(isbn10: row["book_id"]).id
+        book_id = Book.find_by(isbn10: row["book_id"]).id
         copies_hash = {
           book_id: book_id,
           branch_id: row["branch_id"],
