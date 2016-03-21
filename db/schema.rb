@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160321055038) do
+ActiveRecord::Schema.define(version: 20160321061409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,23 @@ ActiveRecord::Schema.define(version: 20160321055038) do
 
   add_index "books", ["isbn"], name: "index_books_on_isbn", unique: true, using: :btree
   add_index "books", ["title"], name: "index_books_on_title", using: :btree
+
+  create_table "borrowers", force: :cascade do |t|
+    t.string   "card_no"
+    t.string   "ssn"
+    t.string   "fname"
+    t.string   "lname"
+    t.string   "email"
+    t.text     "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "borrowers", ["card_no"], name: "index_borrowers_on_card_no", unique: true, using: :btree
+  add_index "borrowers", ["ssn"], name: "index_borrowers_on_ssn", unique: true, using: :btree
 
   create_table "branches", force: :cascade do |t|
     t.string   "name"
