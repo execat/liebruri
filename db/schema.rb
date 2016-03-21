@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160321061409) do
+ActiveRecord::Schema.define(version: 20160321062952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,8 +84,26 @@ ActiveRecord::Schema.define(version: 20160321061409) do
   add_index "copies", ["book_id"], name: "index_copies_on_book_id", using: :btree
   add_index "copies", ["branch_id"], name: "index_copies_on_branch_id", using: :btree
 
+  create_table "loans", force: :cascade do |t|
+    t.integer  "book_id"
+    t.integer  "branch_id"
+    t.integer  "borrower_id"
+    t.date     "date_out"
+    t.date     "date_in"
+    t.date     "due_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "loans", ["book_id"], name: "index_loans_on_book_id", using: :btree
+  add_index "loans", ["borrower_id"], name: "index_loans_on_borrower_id", using: :btree
+  add_index "loans", ["branch_id"], name: "index_loans_on_branch_id", using: :btree
+
   add_foreign_key "authors_books", "authors"
   add_foreign_key "authors_books", "books"
   add_foreign_key "copies", "books"
   add_foreign_key "copies", "branches"
+  add_foreign_key "loans", "books"
+  add_foreign_key "loans", "borrowers"
+  add_foreign_key "loans", "branches"
 end
