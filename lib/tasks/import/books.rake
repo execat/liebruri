@@ -8,6 +8,7 @@ namespace :import do
     ActiveRecord::Base.transaction do
       CSV.foreach(filename, headers: true, col_sep: "\t") do |row|
         isbn13 = row["ISBN13"]
+        isbn10 = row["ISBN10"]
         title = row["Title"]
         authors = (row["Authro"] || "").split(',').map do |a|
           Author.create(author_hash_for a)
@@ -18,6 +19,7 @@ namespace :import do
 
         book_hash = {
           isbn: isbn13,
+          isbn10: isbn10,
           title: title,
           cover: cover,
           publisher: publisher,

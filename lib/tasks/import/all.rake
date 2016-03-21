@@ -1,3 +1,3 @@
 namespace :import do
-  task :all => %w(books)
+  task :all => %w(books branches copies)
 end
