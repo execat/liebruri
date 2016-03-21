@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160321052509) do
+ActiveRecord::Schema.define(version: 20160321055038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160321052509) do
     t.integer  "pages"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "isbn10"
   end
 
   add_index "books", ["isbn"], name: "index_books_on_isbn", unique: true, using: :btree
@@ -55,6 +56,19 @@ ActiveRecord::Schema.define(version: 20160321052509) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "copies", force: :cascade do |t|
+    t.integer  "book_id"
+    t.integer  "branch_id"
+    t.integer  "no_of_copies"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "copies", ["book_id"], name: "index_copies_on_book_id", using: :btree
+  add_index "copies", ["branch_id"], name: "index_copies_on_branch_id", using: :btree
+
   add_foreign_key "authors_books", "authors"
   add_foreign_key "authors_books", "books"
+  add_foreign_key "copies", "books"
+  add_foreign_key "copies", "branches"
 end
