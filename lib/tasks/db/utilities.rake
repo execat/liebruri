@@ -20,8 +20,8 @@ namespace :db do
       user ||= "liebruri"
       cmd = "pg_restore --verbose --host #{host} --username #{user} --clean --no-owner --no-acl --dbname #{db} #{Rails.root}/data/#{filename}"
     end
-    Rake::Task["db:drop"].invoke
-    Rake::Task["db:create"].invoke
+    Rake::Task["db:drop"].invoke rescue nil
+    Rake::Task["db:create"].invoke rescue nil
     puts cmd
     exec cmd
   end
