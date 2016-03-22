@@ -3,4 +3,10 @@ class Book < ApplicationRecord
 
   validates :isbn, presence: true
   validates :title, presence: true
+
+  has_many :copies, foreign_key: "book_id", class_name: "Copies"
+  has_many :branches, through: :copies
+  has_many :loans
+  has_many :fines, through: :loans
+  has_many :borrowers, through: :loans
 end

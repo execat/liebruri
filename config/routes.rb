@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/search' => 'search#show'
+
   root 'home#index'
   get 'about', to: 'home#about'
 
