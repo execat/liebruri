@@ -2,6 +2,7 @@ class Loan < ApplicationRecord
   belongs_to :book
   belongs_to :branch
   belongs_to :borrower
+  has_one :fine
 
   validates :book_id, presence: true
   validates :branch_id, presence: true

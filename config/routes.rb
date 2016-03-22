@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get '/search' => 'search#show'
 
+  get '/fines/update/:secret_token' => 'fines#update'
+
   root 'home#index'
   get 'about', to: 'home#about'
 
