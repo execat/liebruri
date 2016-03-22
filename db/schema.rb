@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20160321064122) do
   create_table "fines", force: :cascade do |t|
     t.integer  "loan_id"
     t.decimal  "amount",     precision: 30, scale: 2
-    t.decimal  "paid",       precision: 30, scale: 2
+    t.boolean  "paid"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
