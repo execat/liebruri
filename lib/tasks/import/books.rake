@@ -4,6 +4,9 @@ require 'people'
 namespace :import do
   task books: :environment do
     filename = "data/books.csv"
+    line_count = `wc -l "#{filename}"`.strip.split(' ')[0].to_i
+    puts "Importing books and authors"
+    puts "Total: #{line_count}"
     i = 0
     ActiveRecord::Base.transaction do
       CSV.foreach(filename, headers: true, col_sep: "\t") do |row|
@@ -43,5 +46,6 @@ def author_hash_for author
     mname: name[:middle],
     lname: name[:last],
     suffix: name[:suffix],
+    full_name: author,
   }
 end

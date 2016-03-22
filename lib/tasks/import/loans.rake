@@ -3,6 +3,9 @@ require 'csv'
 namespace :import do
   task loans: :environment do
     filename = "data/book_loans.csv"
+    line_count = `wc -l "#{filename}"`.strip.split(' ')[0].to_i
+    puts "Importing book loans"
+    puts "Total: #{line_count}"
     i = 0
     ActiveRecord::Base.transaction do
       CSV.foreach(filename, headers: true, col_sep: "\t") do |row|
