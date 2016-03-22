@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get '/loans/issue' => 'loans#create'
+  get '/loans/deposit' => 'loans#show'
+  get '/loans/deposit/:loan_id' => 'loans#update'
+
   get '/search' => 'search#show'
 
   root 'home#index'

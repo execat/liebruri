@@ -7,5 +7,4 @@ class Loan < ApplicationRecord
   validates :branch_id, presence: true
   validates :borrower_id, presence: true
   validates :due_date, presence: true
-  validates :date_in, presence: true
 end
