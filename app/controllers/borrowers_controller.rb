@@ -1,4 +1,7 @@
 class BorrowersController < ApplicationController
+  def index
+  end
+
   def create
     @response = create_borrower
   end
@@ -15,8 +18,7 @@ class BorrowersController < ApplicationController
   def borrower_hash
     param = borrowers_create_params
     parser = People::NameParser.new
-    binding.pry
-    name = parser.parse(param[:name])
+    name = parser.parse("#{param[:fname]} #{param[:lname]}")
     {
       card_no: Borrower.maximum(:card_no).next,
       ssn: param[:ssn],
@@ -31,6 +33,6 @@ class BorrowersController < ApplicationController
   end
 
   def borrowers_create_params
-    params.permit(:ssn, :name, :address, :email, :city, :state, :phone)
+    params.permit(:ssn, :fname, :lname, :address, :email, :city, :state, :phone)
   end
 end

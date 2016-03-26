@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/loans/deposit' => 'loans#show'
   get '/loans/deposit/:loan_id' => 'loans#update'
 
+  get '/borrowers' => 'borrowers#index'
   get '/borrowers/new' => 'borrowers#create'
 
   get '/search' => 'search#index'

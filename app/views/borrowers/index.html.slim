@@ -1,0 +1,35 @@
+.jumbotron
+  h1 Liebruri
+  p.lead
+    | Add a borrower
+  p
+    a.btn.btn-lg.btn-success href="/books" role="button" Start with book search
+.row.marketing
+  .col-lg-12
+    = form_tag '/borrowers/new', :method => 'get' do
+      p
+        .form-group
+          = label_tag :ssn, "SSN"
+          = text_field_tag :ssn, nil, placeholder: 'SSN', id: 'ssn', class: 'form-control'
+        .form-group
+          = label_tag :fname, "First Name"
+          = text_field_tag :fname, nil, placeholder: 'First Name', id: 'fname', class: 'form-control'
+        .form-group
+          = label_tag :lname, "Last Name"
+          = text_field_tag :lname, nil, placeholder: 'Last Name', id: 'lname', class: 'form-control'
+        .form-group
+          = label_tag :email, "Email"
+          = text_field_tag :email, nil, placeholder: 'Email', id: 'email', class: 'form-control'
+        .form-group
+          = label_tag :address, "Address"
+          = text_field_tag :address, nil, placeholder: 'Address', id: 'address', class: 'form-control'
+        .form-group
+          = label_tag :city, "City"
+          = text_field_tag :city, nil, placeholder: 'City', id: 'city', class: 'form-control'
+        .form-group
+          = label_tag :state, "State"
+          = text_field_tag :state, nil, placeholder: 'State', id: 'state', class: 'form-control'
+        .form-group
+          = label_tag :phone, "Phone"
+          = text_field_tag :phone, nil, placeholder: 'Phone', id: 'phone', class: 'form-control'
+        = submit_tag "Search", :name => nil, class: ['btn', 'btn-success']
