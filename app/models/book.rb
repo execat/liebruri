@@ -9,4 +9,8 @@ class Book < ApplicationRecord
   has_many :loans
   has_many :fines, through: :loans
   has_many :borrowers, through: :loans
+
+  def authors_string
+    authors.pluck(:full_name).to_sentence
+  end
 end

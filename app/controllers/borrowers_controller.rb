@@ -15,6 +15,7 @@ class BorrowersController < ApplicationController
   def borrower_hash
     param = borrowers_create_params
     parser = People::NameParser.new
+    binding.pry
     name = parser.parse(param[:name])
     {
       card_no: Borrower.maximum(:card_no).next,

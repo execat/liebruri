@@ -1,0 +1,26 @@
+table.table.table-striped
+  tr
+    th Name
+    th Book Issued
+    th Branch
+    th Date Due
+    th Action
+  - response.each do |loan|
+    tr
+      td
+        = loan.borrower.full_name
+      td
+        = loan.book.title
+        .small
+          #{loan.book.authors_string}
+      td
+        = loan.branch.name
+      td
+        = loan.due_date
+      td
+        - if loan.date_in
+          a.btn.btn-primary disabled="disabled"
+            | Submitted
+        - else
+          a.btn.btn-primary href="/loans/deposit/#{loan.id}"
+            | Submit

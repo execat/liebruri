@@ -2,4 +2,21 @@ h1 Search#show
 p Find me in app/views/search/show.html.slim
 
 p
+  h2 All results
+  = render "shared/search_show", response: @response[:all]
+
+p
+  h2 ISBN results
+  = render "shared/search_show", response: @response[:isbn]
+
+p
+  h2 Title results
+  = render "shared/search_show", response: @response[:title]
+
+p
+  h2 Author results
+  = render "shared/search_show", response: @response[:author]
+
+p
+  h2 Raw data to debug
   == ap(@response, html: true)

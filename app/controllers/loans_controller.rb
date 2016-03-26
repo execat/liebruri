@@ -1,4 +1,7 @@
 class LoansController < ApplicationController
+  def index
+  end
+
   def create
     @response = issue
   end
@@ -15,7 +18,7 @@ class LoansController < ApplicationController
   def issue
     param = loan_create_params
     card_no = param[:card_no]
-    copies_id = param[:copies_id]
+    copies_id = Copies.find_by(book_id: Book.find_by(isbn: param[:isbn]).id, branch_id: param[:branch_id]).id
 
     borrower = Borrower.find_by(card_no: card_no)
     return "Invalid borrower card no: #{card_no}" unless borrower
@@ -44,16 +47,20 @@ class LoansController < ApplicationController
     param = loan_search_params
     borrower_name = param[:borrower_name]
     sanitized_borrower_name = "%#{borrower_name}%"
-    book_id = param[:book_id]
-    card_no = param[:card_no]
 
-    by_card = Borrower.where('card_no LIKE ?', card_no).pluck(:id) if card_no
-    by_name = Borrower.where('fname LIKE ? OR lname LIKE ?', sanitized_borrower_name, sanitized_borrower_name).pluck(:id) if borrower_name
-    by_book = Book.where(id: book_id).map { |book| book.borrowers }.pluck(:id) if book_id
+    isbn = param[:isbn]
+    books = Book.where('isbn LIKE ?', "%#{isbn}%")
+
+    card_no = param[:card_no]
+    sanitized_card_no = "%#{card_no}%"
+
+    by_card = Borrower.where('card_no LIKE ?', sanitized_card_no).pluck(:id) unless card_no.blank?
+    by_name = Borrower.where('fname LIKE ? OR lname LIKE ?', sanitized_borrower_name, sanitized_borrower_name).pluck(:id) unless borrower_name.blank?
+    by_isbn = books.map { |b| b.borrowers }.flatten.pluck(:id) unless books.blank?
     {
       by_card: Loan.where(borrower_id: by_card),
       by_name: Loan.where(borrower_id: by_name),
-      by_book: Loan.where(borrower_id: by_book),
+      by_isbn: Loan.where(borrower_id: by_isbn),
     }
   end
 
@@ -67,11 +74,11 @@ class LoansController < ApplicationController
   end
 
   def loan_create_params
-    params.permit(:card_no, :copies_id)
+    params.permit(:card_no, :isbn, :branch_id)
   end
 
   def loan_search_params
-    params.permit(:card_no, :borrower_name, :book_id)
+    params.permit(:card_no, :borrower_name, :isbn)
   end
 
   def loan_update_params

@@ -1,5 +1,18 @@
-h1 Loans#create
+h1 Loans#show
 p Find me in app/views/loans/show.html.slim
 
 p
-  == ap(@response)
+  h2 Users for matching ISBN
+  = render "shared/loans_show", response: @response[:by_isbn]
+
+p
+  h2 Users for matching cards
+  = render "shared/loans_show", response: @response[:by_card]
+
+p
+  h2 Users for matching names
+  = render "shared/loans_show", response: @response[:by_name]
+
+p
+  h2 Raw data to debug
+  == ap(@response, html: true)

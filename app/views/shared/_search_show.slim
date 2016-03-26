@@ -1,0 +1,31 @@
+table.table.table-striped
+  tr
+    th ISBN
+    th Title
+    th Authors
+    th Branch Info
+  - response.each do |resp|
+    tr
+      td
+        = resp[:isbn]
+      td
+        = resp[:title]
+      td
+        = resp[:authors]
+      td
+        table.table
+          tr
+            th Branch ID
+            th Branch name
+            th Total Copies
+            th Available Copies
+          - resp[:branch_info].each do |branch|
+            tr
+              td
+                = branch[:branch_id]
+              td
+                = branch[:branch_name]
+              td
+                = branch[:total_copies]
+              td
+                = branch[:available_copies]

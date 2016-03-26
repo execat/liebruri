@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   end
 
   def show
-    # Take all, or ISBN, or title, or authors
+    # Take all, or ISBN, or title, or author
     # and return
     # - branch_info
     # - branch_id
@@ -14,7 +14,7 @@ class SearchController < ApplicationController
     params = search_params
 
     # For all
-    if params[:all]
+    unless params[:all].blank?
       all_param = "%#{params[:all]}%"
       all_results = Book.joins(:authors).where('authors.full_name LIKE ? OR
                               books.isbn LIKE ? OR
@@ -23,20 +23,20 @@ class SearchController < ApplicationController
     end
 
     # For ISBN
-    if params[:isbn]
+    unless params[:isbn].blank?
       isbn_param = "%#{params[:isbn]}%"
       isbn_results = Book.where('isbn LIKE ?', isbn_param).pluck(:id).uniq
     end
 
     # For title
-    if params[:title]
+    unless params[:title].blank?
       title_param = "%#{params[:title]}%"
       title_results = Book.where('title LIKE ?', title_param).pluck(:id).uniq
     end
 
     # For authors
-    if params[:authors]
-      author_param = "%#{params[:authors]}%"
+    unless params[:author].blank?
+      author_param = "%#{params[:author]}%"
       author_results= Book.joins(:authors).
         where('full_name LIKE ?', author_param).pluck(:id).uniq
     end
@@ -45,7 +45,7 @@ class SearchController < ApplicationController
       all: fetch_records_for(all_results),
       isbn: fetch_records_for(isbn_results),
       title: fetch_records_for(title_results),
-      authors: fetch_records_for(author_results),
+      author: fetch_records_for(author_results),
     }
   end
 
@@ -57,8 +57,8 @@ class SearchController < ApplicationController
       {
         isbn: book.isbn,
         title: book.title,
-        authors: book.authors,
-        branch_info: book.copies.map { |copy|
+        authors: book.authors.pluck(:full_name).to_sentence,
+        branch_info: book.copies.sort_by(&:branch_id).map { |copy|
           branch_id = copy.branch_id
           total_copies = copy.no_of_copies
           loaned_copies = Loan.where(book_id: id, branch_id: branch_id).
@@ -68,7 +68,7 @@ class SearchController < ApplicationController
             branch_id: copy.branch_id,
             branch_name: copy.branch.name,
             total_copies: total_copies,
-            avaiable_copies: available_copies,
+            available_copies: available_copies,
           }
         },
       }
@@ -76,6 +76,6 @@ class SearchController < ApplicationController
   end
 
   def search_params
-    params.permit(:all, :isbn, :title, :authors)
+    params.permit(:all, :isbn, :title, :author)
   end
 end

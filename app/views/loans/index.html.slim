@@ -1,0 +1,35 @@
+.jumbotron
+  h1 Liebruri
+  p.lead
+    | Check in or check out by entering data in the fields below.
+  p
+    a.btn.btn-lg.btn-success href="/books" role="button" Start with book search
+.row.marketing
+  .col-lg-6
+    h2 Check Out (Issue)
+    = form_tag '/loans/issue', :method => 'get' do
+      p
+        .form-group
+          = label_tag :isbn, "ISBN"
+          = text_field_tag :isbn, nil, placeholder: 'ISBN', id: 'isbn', class: 'form-control'
+        .form-group
+          = label_tag :title, "Branch ID"
+          = text_field_tag :branch_id, nil, placeholder: 'Branch ID', id: 'branch_id', class: 'form-control'
+        .form-group
+          = label_tag :card_no, "Card No"
+          = text_field_tag :card_no, nil, placeholder: 'Card No', id: 'card_no', class: 'form-control'
+        = submit_tag "Search", :name => nil, class: ['btn', 'btn-success']
+  .col-lg-6
+    h2 Check In (Deposit)
+    = form_tag '/loans/deposit', :method => 'get' do
+      p
+        .form-group
+          = label_tag :isbn, "ISBN"
+          = text_field_tag :isbn, nil, placeholder: 'ISBN', id: 'isbn', class: 'form-control'
+        .form-group
+          = label_tag :card_no, "Card No"
+          = text_field_tag :card_no, nil, placeholder: 'Card No', id: 'card_no', class: 'form-control'
+        .form-group
+          = label_tag :borrower_name, "Borrower Name"
+          = text_field_tag :borrower_name, nil, placeholder: 'Borrower Name', id: 'borrower_name', class: 'form-control'
+        = submit_tag "Search", :name => nil, class: ['btn', 'btn-success']

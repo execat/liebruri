@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/loans' => 'loans#index'
   get '/loans/issue' => 'loans#create'
   get '/loans/deposit' => 'loans#show'
   get '/loans/deposit/:loan_id' => 'loans#update'
