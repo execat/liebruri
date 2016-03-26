@@ -1,4 +1,7 @@
 class SearchController < ApplicationController
+  def index
+  end
+
   def show
     # Take all, or ISBN, or title, or authors
     # and return

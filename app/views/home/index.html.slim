@@ -1,2 +1,23 @@
-h1 Home#index
-p Find me in app/views/home/index.html.slim
+.jumbotron
+  h1 Liebruri
+  p.lead
+    | Click on links on the top to operate on the books, loans, borrowers, fines.
+  p
+    a.btn.btn-lg.btn-success href="/books" role="button" Start with book search
+.row.marketing
+  .col-lg-6
+    h4 Books
+    p
+      | Search a book using ISBN, title, and/or authors (even substring matching!)
+      |  and get availability for the book and much more.
+    h4 Loans
+    p
+      | Check out books given copy ID and borrower ID with validations.
+      | Check in books for a book ID and a borrower ID.
+  .col-lg-6
+    h4 Borrowers
+    p
+      | Create new borrowers.
+    h4 Fines
+    p
+      | Calculate fines that are due for all the people on the system.

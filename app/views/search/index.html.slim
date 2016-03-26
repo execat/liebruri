@@ -1,0 +1,23 @@
+.jumbotron
+  h1 Liebruri
+  p.lead
+    | Search for a book using ISBN, title, and/or authors in the fields below.
+  p
+    a.btn.btn-lg.btn-success href="/books" role="button" Start with book search
+.row.marketing
+  .col-lg-12
+    = form_tag '/search/fetch', :method => 'get' do
+      p
+        .form-group
+          = label_tag :all, "All"
+          = text_field_tag :all, nil, placeholder: 'All', id: 'all', class: 'form-control'
+        .form-group
+          = label_tag :isbn, "ISBN"
+          = text_field_tag :isbn, nil, placeholder: 'ISBN', id: 'isbn', class: 'form-control'
+        .form-group
+          = label_tag :title, "Title"
+          = text_field_tag :title, nil, placeholder: 'Title', id: 'title', class: 'form-control'
+        .form-group
+          = label_tag :author, "Author"
+          = text_field_tag :author, nil, placeholder: 'Author', id: 'author', class: 'form-control'
+        = submit_tag "Search", :name => nil, class: ['btn', 'btn-success']

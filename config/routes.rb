@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   get '/borrowers/new' => 'borrowers#create'
 
-  get '/search' => 'search#show'
+  get '/search' => 'search#index'
+  get '/search/fetch' => 'search#show'
 
   get '/fines/update/:secret_token' => 'fines#update'
 

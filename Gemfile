@@ -17,6 +17,7 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'awesome_print'
+gem 'html2slim'
 
 # gem 'capistrano-rails', group: :development
 

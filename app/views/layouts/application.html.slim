@@ -1,5 +1,5 @@
 doctype html
-html
+html lang="en"
   head
     title
       | Liebruri
@@ -8,4 +8,7 @@ html
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
   body
-    = yield
+    .container
+      = render "shared/navbar"
+      = yield
+      = render "shared/footer"
