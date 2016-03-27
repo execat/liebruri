@@ -8,4 +8,8 @@ class Loan < ApplicationRecord
   validates :branch_id, presence: true
   validates :borrower_id, presence: true
   validates :due_date, presence: true
+
+  def late?
+    Date.today > due_date
+  end
 end

@@ -38,10 +38,7 @@
                     td
                       - if loan.fine
                         - if loan.date_in
-                          - unless loan.fine.paid
-                            a.btn.btn-success href="/fines/pay/#{loan.id}" Pay
-                          - else
-                            a.btn.btn-success disabled="disabled" Paid
+                          a.btn.btn-success href="/fines/pay/#{loan.id}" Pay
                         - else
                           a.btn.btn-success disabled="disabled" Not returned
                       - else

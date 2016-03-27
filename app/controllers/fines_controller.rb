@@ -1,12 +1,23 @@
 class FinesController < ApplicationController
   def index
+    sql = "SELECT borrowers.id, sum(fines.amount) FROM
+    (borrowers join loans on loans.borrower_id = borrowers.id) join fines on fines.loan_id = loans.id
+    GROUP BY borrowers.id"
+    result = ActiveRecord::Base.connection.execute(sql).to_a
+    @result = result.map do |x|
+      [Borrower.find(x["id"]), x["sum"]]
+    end
+  end
+
+  def pay
+    param = pay_params
+    @response = Fine.find(param[:id]).update_attribute(:paid, true)
   end
 
   def update
     secret_token = update_params[:secret_token]
     return false unless secret_token == "rabindranath_tagore!"
     historic_late_books = Loan.where('due_date < date_in')
-    historic_late_books.joins(:fine).map { |x| x.fine.update_attribute(:paid, true) }
     current_late_books = Loan.where('due_date < ?', Date.today).where(date_in: nil)
     update_entries(historic_late_books)
     update_entries(current_late_books)
@@ -29,5 +40,9 @@ class FinesController < ApplicationController
 
   def update_params
     params.permit(:secret_token)
+  end
+
+  def pay_params
+    params.permit(:borrower_id)
   end
 end
