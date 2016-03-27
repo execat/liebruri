@@ -1,2 +1,21 @@
 h1 Fines#update
-p Find me in app/views/fines/update.html.slim
+
+div
+  h3 Total fines due:
+
+  br
+  table.table.table-striped
+    tr
+      th Historic
+      td
+        = @historic_fines
+    tr
+      th Current
+      td
+        = @current_fines
+    tr
+      th Total
+      td
+        = @historic_fines + @current_fines
+
+== ap(@response, html: true)

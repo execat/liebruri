@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/search' => 'search#index'
   get '/search/fetch' => 'search#show'
 
+  get '/fines' => 'fines#index'
   get '/fines/update/:secret_token' => 'fines#update'
 
   root 'home#index'
